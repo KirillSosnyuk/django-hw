@@ -41,11 +41,9 @@ DATA = {
 
 def recipe_view(request, recipe):
     servings = int(request.GET.get('servings', 1))
-    print(servings)
     context = {
         'recipe': {ingredient: quantity * servings for ingredient, quantity in DATA.get(recipe).items()},
     }
-    print(DATA.get(recipe).items())
     return render(request, 'calculator/index.html',context)
 
 
