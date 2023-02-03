@@ -16,6 +16,15 @@ DATA = {
         'сыр, ломтик': 1,
         'помидор, ломтик': 1,
     },
+    'brownie': {
+        'Темный шоколад, г' :100,
+        'Сливочное масло, г': 180,
+        'Коричневый сахар, г': 200,
+        'Куриное яйцо, шт': 4,
+        'Пшеничная мука, г': 100,
+        'Грецкие орехи, г': 100,
+
+    },
     # можете добавить свои рецепты ;)
 }
 
@@ -28,3 +37,15 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def recipe_view(request, recipe):
+    servings = int(request.GET.get('servings', 1))
+    print(servings)
+    context = {
+        'recipe': {ingredient: quantity * servings for ingredient, quantity in DATA.get(recipe).items()},
+    }
+    print(DATA.get(recipe).items())
+    return render(request, 'calculator/index.html',context)
+
+
